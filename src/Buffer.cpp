@@ -104,7 +104,6 @@ void Buffer::insertChar(char c) {
 	cursorDown();
 	return;
     }
-    std::cout << m_cursor.current->data << " " << m_cursor.x << " " << c << std::endl;
     m_cursor.current->data.insert(m_cursor.x,1,c);
     m_cursor.x++;
 }
