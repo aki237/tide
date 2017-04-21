@@ -10,6 +10,7 @@
 #include "Node.hpp"
 #include "Color.hpp"
 #include "Const.hpp"
+#include "Tokenizer.hpp"
 
 // # Private Common Functions
 
@@ -165,7 +166,26 @@ void TextView::callbackDraw() {
 	std::string an = std::regex_replace(a, std::regex("\\t"), tabs);
 	cairo_select_font_face(cr, "Inconsolata", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
 	cairo_move_to(cr, GUTTER_SIZE + 5, (y + 1) * (font_size + (font_size/2.0)));
-	cairo_show_text(cr, an.c_str());
+	Tokenizer tz(an," ({[]})*+-=/;\n");
+	tz.inQuotes(true);
+	Token t = setColor(tz.Next());
+	std::string tmpt = "";
+	while (t.notNull) {
+	    std::string tmp = t.token;
+	    tmpt += tmp;
+	    Color::SetCairoColor(cr, t.color);
+	    cairo_show_text(cr, tmp.c_str());
+	    cairo_text_extents(cr, tmpt.c_str(), &ex);
+	    cairo_move_to(cr, GUTTER_SIZE + 5 + ex.x_advance, (y + 1) * (font_size + (font_size/2.0)));
+	    tmp = t.delim;
+	    tmpt += tmp;
+	    Color::SetCairoColor(cr, "#FFFFFFFF");
+	    cairo_show_text(cr, tmp.c_str());
+	    cairo_text_extents(cr, tmpt.c_str(), &ex);
+	    cairo_move_to(cr, GUTTER_SIZE + 5 + ex.x_advance, (y + 1) * (font_size + (font_size/2.0)));
+	    t = setColor(tz.Next());
+	    Color::SetCairoColor(cr, "#FFFFFFFF");
+	}
 	y++;
     }
     cairo_rectangle(cr, GUTTER_SIZE + 5 + (cx*ex.x_advance), (cy-ln) * (font_size + (font_size/2.0)), 0.5, ((1.7*font_size)));
