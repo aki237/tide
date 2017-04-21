@@ -1,0 +1,6 @@
+[submodule "sol2"]
+	path = external/sol2
+	url = https://github.com/ThePhD/sol2
+[submodule "libclipboard"]
+	path = external/libclipboard
+	url = https://github.com/jtanx/libclipboard

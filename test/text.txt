@@ -1,0 +1,32 @@
+# Tide : Cleaner than Vim :P
+
+I have implemented a text editor in Go..... But apparently Gtk+ hates the Go GC.
+So decided to re write the whole project in C++ but using FLTK (Cross platform).
+I think I have extensively documented the code. Unpack the attachment. cd into it.
+
+**For building the editor**
+
+```shell
+make -j8
+make run
+```
+
+**For documentation run this**
+
+```shell
+make doc
+```
+
+**For cleaning the source directory.**
+*Note* : This also cleans the doc directory.
+
+```shell
+make clean
+```
+
+All the docs will be stored in the docs directory. Every class (.cpp,.hpp) have been mentioned in the docs.
+Currently the editor doesn't do much than moving around, typing, selection, line number, line highlight. etc.,
+(only keyboard sorry because the text editing component is wholly written from scratch in Cairo Vector Drawing.)
+Soon this will evolve into a normal notepad with all necessary utils (~~Save~~, ~~Copy~~, ~~Paste~~, Find&Replace).
+I have already tested a lua embeding (Why Lua ? : lightweight) for this with which plugins can be written.
+Any thoughts and help is welcome. Currently It only consumes only 2 Megs of RAM.

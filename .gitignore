@@ -1,0 +1,9 @@
+build
+doc
+install
+*.o
+*.a
+*.so
+external/lua/src/lua
+external/lua/src/luac
+
