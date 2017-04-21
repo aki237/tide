@@ -57,7 +57,7 @@ function autoPairs()
 	 moveto(x, y)
 	 m:cursorRight()
       else
-	 moveto(sx, sy)
+	 moveto(sx + 1, sy)
 	 if key == "(" then
 	    m:insertStdString(")")
 	 elseif key == "[" then
