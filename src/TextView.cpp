@@ -184,10 +184,10 @@ void TextView::callbackDraw() {
 	    cairo_text_extents(cr, tmpt.c_str(), &ex);
 	    cairo_move_to(cr, GUTTER_SIZE + 5 + ex.x_advance, (y + 1) * (font_size + (font_size/2.0)));
 	    t = setColor(tz.Next());
-	    Color::SetCairoColor(cr, "#FFFFFFFF");
 	}
 	y++;
     }
+    cairo_text_extents(cr, "O", &ex);
     cairo_rectangle(cr, GUTTER_SIZE + 5 + (cx*ex.x_advance), (cy-ln) * (font_size + (font_size/2.0)), 0.5, ((1.7*font_size)));
 }
 
