@@ -32,7 +32,6 @@ std::string keywords[] = {
 				     "enum",
 				     "dynamic_cast",
 				     "extern",
-				     "false",
 				     "float",
 				     "for",
 				     "union",
@@ -67,17 +66,25 @@ std::string keywords[] = {
 				     "template",
 				     "this",
 				     "throw",
-				     "true",
 				     "try",
 				     "typedef",
 				     "typeid",
 				     "unsigned",
 				     "wchar_t",
-				     "while"
+				     "while",
+				     "#include",
+				     "#define",
+				     "#ifndef",
+				     "#endif",
+				     "include",
+				     "define",
+				     "ifndef",
+				     "endif",
+				     "#"
 };
 
 bool isIn (std::string list[], std::string str) {
-    for (int i = 0 ; i < 60; i++) {
+    for (int i = 0 ; i < 67; i++) {
 	if (list[i] == str) {
 	    return true;
 	}
@@ -86,11 +93,31 @@ bool isIn (std::string list[], std::string str) {
 }
 
 Token setColor(Token t) {
-    if ( isIn(keywords,t.token) ) {
+    if (isIn(keywords,t.token)){
 	t.color = "#F92672";
-    } else {
-	t.color = "#FFFFFF";
+	return t;
     }
+    if (std::regex_match(t.token, std::regex("\".*\""))){
+	t.color = "#E6DB74";
+	return t;
+    }
+    if (t.token == "true" || t.token == "false") {
+	t.color = "#AE81FF";
+	return t;
+    }
+    if (t.delim == "(") {
+	t.color = "#66D9EF";
+	return t;
+    }
+    if (t.delim == "*") {
+	t.color = "#66D9EF";
+	return t;
+    }
+    if (std::regex_match(t.token, std::regex("<.*>"))) {
+	t.color = "#E6DB74";
+	return t;
+    }
+    t.color = "#FFFFFF";
     return t;
 }
 
