@@ -330,7 +330,7 @@ std::vector<std::string> Buffer::getLines(double p_window_height,double p_font_h
 	c++;
     }
     c = 0;
-    while (c <= sl_lines) {
+    while (c < sl_lines) {
 	ret.push_back(init->data);
 	if (init->next == nullptr) {
 	    break;
@@ -406,7 +406,7 @@ std::string Buffer::getCurrentLine() {
 */
 void Buffer::setTop(double p_window_height,double p_font_height) {
     sl_lines = int(p_window_height/p_font_height) + 1;
-    if (sl_lines-(m_cursor.y-m_cursor.top) <= 1){
+    if (sl_lines-(m_cursor.y-m_cursor.top) <= 4){
 	m_cursor.top += 1;
     } else if (m_cursor.y-m_cursor.top < 1){
 	m_cursor.top -= 1;
@@ -415,7 +415,7 @@ void Buffer::setTop(double p_window_height,double p_font_height) {
 	}
     }
     if ( sl_lines < m_cursor.y - m_cursor.top ) {
-	m_cursor.top = m_cursor.y - sl_lines + 2;
+    	m_cursor.top = m_cursor.y - sl_lines + 2;
     }
 }
 
@@ -571,4 +571,20 @@ Error Buffer::saveFile() {
     }
     Error e;
     return e;
+}
+
+/*
+  ### `std::string Buffer::getFilename();`
+  *Public Class Function*
+
+  Returns a `std::string`. Takes in nothing.
+  Returns the file name of the current buffer.
+*/
+std::string Buffer::getFilename() {
+    try {
+	return filename.Get();
+    } catch ( const std::invalid_argument& ex ) {
+	return "Untitled";
+    }
+    return "Untitled";
 }
