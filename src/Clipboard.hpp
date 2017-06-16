@@ -21,13 +21,13 @@
   Class Clipboard contains functions and members to implement clipboard for the editor.
 */
 class Clipboard {
-    clipboard_c *m_cb;
+  clipboard_c *m_cb;
 public:
-    Clipboard();
-    Option<std::string> getText();
-    void putText(std::string);
-    void clear();
-    ~Clipboard();
+  Clipboard();
+  Option<std::string> getText();
+  void putText(std::string);
+  void clear();
+  ~Clipboard();
 };
 
 #endif

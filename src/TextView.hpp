@@ -22,7 +22,7 @@
   This type contains the dimensions of a glyph for a selected font and size.
 */
 typedef struct {
-    double w,h;
+  double w,h;
 } font_dimension;
 
 /*
@@ -32,23 +32,23 @@ typedef struct {
   Class TextView contains functions and members to implement a custom text view in a FLTK Window.
 */
 class TextView : public Fl_Box {
- private:
-    void draw(); 
-    cairo_t* cr;
-    cairo_surface_t*  surface;
-    cairo_surface_t*  set_surface(int wo, int ho);
-    void callbackDraw();
-    virtual int handle(int);
-    bool setShortcutKeyState(int, int);
-    bool focused;
-    bool ctrl_pressed, shift_pressed, alt_pressed, super_pressed;
-    double font_size ;
-    font_dimension fdim;
-    Buffer m;
-    Clipboard m_clipboard;
-    sol::state plugin;
- public:
-    void SetBuffer(Buffer&);
-    TextView(int x, int y, int w, int h, Buffer&);
+private:
+  void draw(); 
+  cairo_t* cr;
+  cairo_surface_t*  surface;
+  cairo_surface_t*  set_surface(int wo, int ho);
+  void callbackDraw();
+  virtual int handle(int);
+  bool setShortcutKeyState(int, int);
+  bool focused;
+  bool ctrl_pressed, shift_pressed, alt_pressed, super_pressed;
+  double font_size ;
+  font_dimension fdim;
+  Buffer m;
+  Clipboard m_clipboard;
+  sol::state plugin;
+public:
+  void SetBuffer(Buffer&);
+  TextView(int x, int y, int w, int h, Buffer&);
 };
 #endif

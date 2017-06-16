@@ -18,18 +18,18 @@ template<class T>
 class Node
 {
 public:
-    Node<T> *prev,*next;
-    T data;
-    Node() {
-	prev = nullptr;
-	next = nullptr;
-	data = T();
-    }
-    Node<T>* NewAfter();
-    Node<T>* NewBefore();
-    void InsertAfter(Node<T>*);
-    void InsertBefore(Node<T>*);
-    Node<T>* Delete();    
+  Node<T> *prev,*next;
+  T data;
+  Node() {
+    prev = nullptr;
+    next = nullptr;
+    data = T();
+  }
+  Node<T>* NewAfter();
+  Node<T>* NewBefore();
+  void InsertAfter(Node<T>*);
+  void InsertBefore(Node<T>*);
+  Node<T>* Delete();    
 };
 
 // # Public Class Functions
@@ -43,9 +43,9 @@ public:
 */
 template<class T>
 Node<T>* Node<T>::NewAfter() {
-    Node<T>* temp = new Node<T>;
-    InsertAfter(temp);
-    return temp;
+  Node<T>* temp = new Node<T>;
+  InsertAfter(temp);
+  return temp;
 }
 
 /*
@@ -57,9 +57,9 @@ Node<T>* Node<T>::NewAfter() {
 */
 template<class T>
 Node<T>* Node<T>::NewBefore() {
-    Node<T>* temp = new Node<T>;
-    InsertBefore(temp);
-    return temp;
+  Node<T>* temp = new Node<T>;
+  InsertBefore(temp);
+  return temp;
 }
 
 /*
@@ -70,18 +70,18 @@ Node<T>* Node<T>::NewBefore() {
   This inserts a `link` (passed as a parameter), at `next`.
   ```
   prev <-> current <-> next                            
-                  ^ <------ Inserts the link here and becomes
+  ^ <------ Inserts the link here and becomes
   prev <-> current <-> link <-> next
   ```
 */
 template<class T>
 void Node<T>::InsertAfter(Node<T>* n) {
-    if (next != nullptr) {
-	n->next = next;
-	next->prev = n;
-    }
-    next = n;
-    n->prev = this;
+  if (next != nullptr) {
+    n->next = next;
+    next->prev = n;
+  }
+  next = n;
+  n->prev = this;
 }
 
 /*
@@ -92,19 +92,19 @@ void Node<T>::InsertAfter(Node<T>* n) {
   This inserts a `link` (passed as a parameter), at `prev`.
   ```
   prev <-> current <-> next                            
-          ^ <------ Inserts the link here and becomes
+  ^ <------ Inserts the link here and becomes
   prev <-> link <-> current <-> next
   ```
 */
 template<class T>
 void Node<T>::InsertBefore(Node<T>* n) {
-    if (prev != nullptr) {
-	n->prev = prev;
-	prev->next = n;
-	prev = n;
-    }
+  if (prev != nullptr) {
+    n->prev = prev;
+    prev->next = n;
     prev = n;
-    n->next = this;
+  }
+  prev = n;
+  n->next = this;
 }
 
 /*
@@ -115,19 +115,19 @@ void Node<T>::InsertBefore(Node<T>* n) {
   Deletes the current `link` and joins the `next` and `prev` links.
   ```
   prev <-> current <-> next                            
-          ^ <------ Inserts the link here and becomes
+  ^ <------ Inserts the link here and becomes
   prev <-> link <-> current <-> next
   ```
 */
 template<class T>
 Node<T>* Node<T>::Delete() {
-    if (prev != nullptr) {
-	prev->next = next;
-    }
-    if (next != nullptr) {
-	next->prev = prev;
-    }
-    return prev;
+  if (prev != nullptr) {
+    prev->next = next;
+  }
+  if (next != nullptr) {
+    next->prev = prev;
+  }
+  return prev;
 }
 
 #endif

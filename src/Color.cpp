@@ -22,44 +22,44 @@ const std::string allowed = "0123456789ABCDEF";
   ```
 */
 bool check_color (std::string color) {
-    for (uint i = 1 ; i < color.length(); i++) {
-	if (std::string::npos == allowed.find(color.at(i),0)) {
-	    std::cerr << "Color.cpp <check_color> :: Invalid character found - \"" << color.at(i) << "\"" << std::endl;
-	    return false;
-	}
+  for (uint i = 1 ; i < color.length(); i++) {
+    if (std::string::npos == allowed.find(color.at(i),0)) {
+      std::cerr << "Color.cpp <check_color> :: Invalid character found - \"" << color.at(i) << "\"" << std::endl;
+      return false;
     }
-    return true;
+  }
+  return true;
 }
 
 /*
- ### `std::string processColorHTML (uint, uint, uint, uint)`
- *Inaccessible Common Function*
+  ### `std::string processColorHTML (uint, uint, uint, uint)`
+  *Inaccessible Common Function*
 
- Returns the HTML format color string (like #FF0000FF), for the passed red, green, and blue values.
- Note that the values passed must be from 0 to 255 else this returns a empty string.
+  Returns the HTML format color string (like #FF0000FF), for the passed red, green, and blue values.
+  Note that the values passed must be from 0 to 255 else this returns a empty string.
  
- ```c++
- processColorHTML(52, 69, 86, 255);
- // => #344556FF
- processColorHTML(100,12000,388,399);
- // => "" (and prints "Color.cpp <Color::Color(uint,uint,uint,uint) :: Invalid value (greater than 255)" in stderr)
- ```
+  ```c++
+  processColorHTML(52, 69, 86, 255);
+  // => #344556FF
+  processColorHTML(100,12000,388,399);
+  // => "" (and prints "Color.cpp <Color::Color(uint,uint,uint,uint) :: Invalid value (greater than 255)" in stderr)
+  ```
 */
 std::string processColorHTML(uint r, uint g, uint b, uint a) {
-    if (r > 255 || g > 255 || b > 255 || a > 255) {
-	std::cerr << "Color.cpp <Color::Color(uint,uint,uint,uint) :: Invalid value (greater than 255)." <<  std::endl;
-	return "";
-    }
-    std::string return_color = "#";
-    return_color += allowed.at(r/16);
-    return_color += allowed.at(r%16);
-    return_color += allowed.at(g/16);
-    return_color += allowed.at(g%16);
-    return_color += allowed.at(b/16);
-    return_color += allowed.at(b%16);
-    return_color += allowed.at(a/16);
-    return_color += allowed.at(a%16);
-    return return_color;
+  if (r > 255 || g > 255 || b > 255 || a > 255) {
+    std::cerr << "Color.cpp <Color::Color(uint,uint,uint,uint) :: Invalid value (greater than 255)." <<  std::endl;
+    return "";
+  }
+  std::string return_color = "#";
+  return_color += allowed.at(r/16);
+  return_color += allowed.at(r%16);
+  return_color += allowed.at(g/16);
+  return_color += allowed.at(g%16);
+  return_color += allowed.at(b/16);
+  return_color += allowed.at(b%16);
+  return_color += allowed.at(a/16);
+  return_color += allowed.at(a%16);
+  return return_color;
 }
 
 /*
@@ -76,19 +76,19 @@ std::string processColorHTML(uint r, uint g, uint b, uint a) {
   ```
 */
 color_struct processColor(std::string c) {
-    color_struct r;
-    if (c.length() == 9 && c[0] == '#' && check_color(c)) {
-	r.Red = (uint(allowed.find(c.at(1),0))) * 16;
-	r.Red += uint(allowed.find(c.at(2),0));
-	r.Green = (uint(allowed.find(c.at(3),0))) * 16;
-	r.Green += uint(allowed.find(c.at(4),0));
-	r.Blue = (uint(allowed.find(c.at(5),0))) * 16;
-	r.Blue += uint(allowed.find(c.at(6),0));
-	r.Alpha = (uint(allowed.find(c.at(7),0))) * 16;
-	r.Alpha += uint(allowed.find(c.at(8),0));
-	r.ColorString = c;
-    }
-    return r;
+  color_struct r;
+  if (c.length() == 9 && c[0] == '#' && check_color(c)) {
+    r.Red = (uint(allowed.find(c.at(1),0))) * 16;
+    r.Red += uint(allowed.find(c.at(2),0));
+    r.Green = (uint(allowed.find(c.at(3),0))) * 16;
+    r.Green += uint(allowed.find(c.at(4),0));
+    r.Blue = (uint(allowed.find(c.at(5),0))) * 16;
+    r.Blue += uint(allowed.find(c.at(6),0));
+    r.Alpha = (uint(allowed.find(c.at(7),0))) * 16;
+    r.Alpha += uint(allowed.find(c.at(8),0));
+    r.ColorString = c;
+  }
+  return r;
 }
 
 // # Private Class Functions
@@ -100,11 +100,11 @@ color_struct processColor(std::string c) {
   Returns nothing. It sets the corresponding values of the struct members to the class members (red, green, blue, alpha).
 */
 void Color::set_color(color_struct r) {
-    red = r.Red;
-    green = r.Green;
-    blue = r.Blue;
-    alpha = r.Alpha;
-    color_string = r.ColorString;
+  red = r.Red;
+  green = r.Green;
+  blue = r.Blue;
+  alpha = r.Alpha;
+  color_string = r.ColorString;
 }
 
 
@@ -121,33 +121,33 @@ void Color::set_color(color_struct r) {
   + #344556FE - #RRGGBBAA
 */
 Color::Color(std::string color) {
-    if ((color.length() == 4) && (color[0] == '#')){
-	if (check_color(color)) {
-	    color += "F";
-	    std::string newcolor = "#";
-	    for (uint i = 1 ; i < color.length(); i++) {
-		newcolor += color.at(i);
-		newcolor += color.at(i);
-	    }
-	    set_color(processColor(newcolor));
-	}
-	return;
+  if ((color.length() == 4) && (color[0] == '#')){
+    if (check_color(color)) {
+      color += "F";
+      std::string newcolor = "#";
+      for (uint i = 1 ; i < color.length(); i++) {
+        newcolor += color.at(i);
+        newcolor += color.at(i);
+      }
+      set_color(processColor(newcolor));
     }
-    if ((color.length() == 7) && (color[0] == '#')){
-	if (check_color(color)){
-	    color += "FF";
-	    set_color(processColor(color));
-	}
-	return;
+    return;
+  }
+  if ((color.length() == 7) && (color[0] == '#')){
+    if (check_color(color)){
+      color += "FF";
+      set_color(processColor(color));
     }
-    if ((color.length() == 9) && (color[0] == '#')){
-	if (check_color(color)){
-	    set_color(processColor(color));
-	}
-	return;
-    } else {
-	std::cerr << "Color.cpp <Color::Color(std::string)> :: Invalid color format - \"" << color << "\"." << std ::endl;
+    return;
+  }
+  if ((color.length() == 9) && (color[0] == '#')){
+    if (check_color(color)){
+      set_color(processColor(color));
     }
+    return;
+  } else {
+    std::cerr << "Color.cpp <Color::Color(std::string)> :: Invalid color format - \"" << color << "\"." << std ::endl;
+  }
 }
 
 /*
@@ -158,15 +158,15 @@ Color::Color(std::string color) {
   Valid values for the parameters ranges from 0 to 255.
 */
 Color::Color(uint r, uint g, uint b, uint a) {
-    if (r > 255 || g > 255 || b > 255 || a > 255) {
-	std::cerr << "Color.cpp <Color::Color(uint,uint,uint,uint) :: Invalid value (greater than 255)." <<  std::endl;
-	return;
-    }
-    red = r;
-    green = g;
-    blue = b;
-    alpha = a;
-    color_string = processColorHTML(r,g,b,a);
+  if (r > 255 || g > 255 || b > 255 || a > 255) {
+    std::cerr << "Color.cpp <Color::Color(uint,uint,uint,uint) :: Invalid value (greater than 255)." <<  std::endl;
+    return;
+  }
+  red = r;
+  green = g;
+  blue = b;
+  alpha = a;
+  color_string = processColorHTML(r,g,b,a);
 }
 
 /*
@@ -181,10 +181,10 @@ Color::Color(uint r, uint g, uint b, uint a) {
   ```
 */
 void Color::Print() {
-    std::cout << "Color : " <<
-	color_string <<
-	" - rgba(" << red << ", " << green << ", " << blue << ", " << alpha << ")" <<
-	std::endl;
+  std::cout << "Color : " <<
+    color_string <<
+    " - rgba(" << red << ", " << green << ", " << blue << ", " << alpha << ")" <<
+    std::endl;
 }
 
 /*
@@ -200,7 +200,7 @@ void Color::Print() {
   ```
 */
 color_cairo_struct Color::ToCairoColor() {
-    return color_cairo_struct{float(red)/float(255.0), float(green)/float(255.0), float(blue)/float(255.0), float(alpha)/float(255.0)};
+  return color_cairo_struct{float(red)/float(255.0), float(green)/float(255.0), float(blue)/float(255.0), float(alpha)/float(255.0)};
 }
 
 /*
@@ -215,7 +215,7 @@ color_cairo_struct Color::ToCairoColor() {
   ```
 */
 std::string Color::ToHTMLColor() {
-    return color_string;
+  return color_string;
 }
 
 /*
@@ -230,7 +230,7 @@ std::string Color::ToHTMLColor() {
   ```
 */
 color_struct Color::ToRGBColor() {
-    return color_struct{red, green, blue, alpha};
+  return color_struct{red, green, blue, alpha};
 }
 
 // # Public Static Functions
@@ -242,7 +242,7 @@ color_struct Color::ToRGBColor() {
   This function sets drawing color to cairo context passed. 
 */
 void Color::SetCairoColor(cairo_t* cr, std::string p_color) {
-    Color l_c(p_color);
-    color_cairo_struct l_cr_c = l_c.ToCairoColor();
-    cairo_set_source_rgb(cr, l_cr_c.Red, l_cr_c.Blue, l_cr_c.Green);
+  Color l_c(p_color);
+  color_cairo_struct l_cr_c = l_c.ToCairoColor();
+  cairo_set_source_rgb(cr, l_cr_c.Red, l_cr_c.Blue, l_cr_c.Green);
 }

@@ -10,7 +10,7 @@
 
 class Core {
 private:
-    std::vector<Buffer> buffers;
+  std::vector<Buffer> buffers;
 };
 
 #endif

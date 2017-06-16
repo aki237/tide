@@ -17,15 +17,15 @@
   Template Class Option contains functions and members to declare optional variables.
 */
 template <class T> class Option {
- private:
-    T some;
-    bool is_some;
- public:
-    Option(T);
-    Option();
-    void Set(T);
-    bool IsSome();
-    T Get();
+private:
+  T some;
+  bool is_some;
+public:
+  Option(T);
+  Option();
+  void Set(T);
+  bool IsSome();
+  T Get();
 };
 
 
@@ -39,7 +39,7 @@ template <class T> class Option {
 */
 template <class T>
 Option<T>::Option(T t) {
-    Set(t);
+  Set(t);
 }
 
 /*
@@ -50,7 +50,7 @@ Option<T>::Option(T t) {
 */
 template <class T>
 Option<T>::Option() {
-    is_some = false;
+  is_some = false;
 }
 
 /*
@@ -61,8 +61,8 @@ Option<T>::Option() {
 */
 template <class T>
 void Option<T>::Set(T t) {
-    some = t;
-    is_some = true;    
+  some = t;
+  is_some = true;    
 }
 
 /*
@@ -73,7 +73,7 @@ void Option<T>::Set(T t) {
 */
 template <class T>
 bool Option<T>::IsSome() {
-    return is_some;
+  return is_some;
 }
 
 /*
@@ -87,10 +87,10 @@ bool Option<T>::IsSome() {
 */
 template <class T>
 T Option<T>::Get() {
-    if (!is_some) {
-	throw std::invalid_argument("Option<T>::Get() is called before Option value is set");
-    }
-    return some;
+  if (!is_some) {
+    throw std::invalid_argument("Option<T>::Get() is called before Option value is set");
+  }
+  return some;
 }
 
 #endif
